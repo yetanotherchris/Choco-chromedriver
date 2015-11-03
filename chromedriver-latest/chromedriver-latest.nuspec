@@ -8,7 +8,7 @@
     <authors>C.Small</authors>
     <owners>C.Small</owners>
     <summary>Downloads and installs the latest version of Chromedriver.exe from http://chromedriver.storage.googleapis.com</summary>
-    <description>Finds the latest version of Chromedriver.exe from http://chromedriver.storage.googleapis.com, download it and install it.</description>
+    <description>Finds the latest version of Chromedriver.exe from http://chromedriver.storage.googleapis.com, downloads it and install it.</description>
     <projectUrl>https://github.com/yetanotherchris/Choco-chromedriver-latest</projectUrl>
     <packageSourceUrl>https://github.com/yetanotherchris/Choco-chromedriver-latest</packageSourceUrl>
     <tags>chromedriver webdriver chrome</tags>
