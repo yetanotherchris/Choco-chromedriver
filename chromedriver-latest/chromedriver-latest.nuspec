@@ -4,14 +4,14 @@
   <metadata>
     <id>chromedriver-latest</id>
     <title>Chromedriver.exe - latest version</title>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>C.Small</authors>
     <owners>C.Small</owners>
     <summary>Downloads and installs the latest version of Chromedriver.exe from http://chromedriver.storage.googleapis.com</summary>
     <description>Finds the latest version of Chromedriver.exe from http://chromedriver.storage.googleapis.com, download it and install it.</description>
     <projectUrl>https://github.com/yetanotherchris/Choco-chromedriver-latest</projectUrl>
     <packageSourceUrl>https://github.com/yetanotherchris/Choco-chromedriver-latest</packageSourceUrl>
-    <tags>chromedriver-latest admin SPACE_SEPARATED</tags>
+    <tags>chromedriver webdriver chrome</tags>
     <copyright></copyright>
     <licenseUrl>http://www.github.com</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
