@@ -1,6 +1,8 @@
 # Choco-chromedriver-latest
 Chocolatey package that downloads and installs the latest Chromedriver
 
+https://chocolatey.org/packages/chromedriver-latest
+
 ### Creating or updating the new package
 
     choco new packagename # creates the boiler plate nuspec, ps1 files
