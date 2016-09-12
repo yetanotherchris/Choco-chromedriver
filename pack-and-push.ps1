@@ -1,7 +1,8 @@
 # When a new Chromedriver appears:
 # 1. Update the nuspec file with the version number
 # 2. Update chocolateyinstall.ps1 with the version number
-# 3. Update chocolateyinstall.ps1 with the new SHA1 for the zip file.
+# 3. Get the SHA1 for the zip file (http://onlinemd5.com/)
+# 4. Update chocolateyinstall.ps1 with the new SHA1 for the zip file.
 
 del *.nupkg
 
