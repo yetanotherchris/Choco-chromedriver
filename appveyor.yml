@@ -1,0 +1,19 @@
+version: 1.0.{build}
+skip_tags: true
+shallow_clone: true
+clone_depth: 1
+
+environment:
+  CHOCOLATEY_API_KEY:
+    secure: nl5YRBS+wcVhpEJN3GqQxhqRyOMPgHXmRK6vhhk8oJD6fV3T+ecEpmjlYFthwXRz
+  CHROMEDRIVER_VERSION_NUMBER: 2.27
+
+cache:
+  - packages ->  **\packages.config
+
+branches:
+  only:
+    - master
+
+build_script:
+  - ps: ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber $env:CHROMEDRIVER_VERSION_NUMBER

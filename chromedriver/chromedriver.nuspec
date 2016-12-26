@@ -4,11 +4,11 @@
   <metadata>
     <id>chromedriver</id>
     <title>Chromedriver</title>
-    <version>2.25</version>
+    <version>$version$</version>
     <authors>The Chromium Authors</authors>
     <owners>C.Small</owners>
-    <summary>Downloads and installs the latest version of Chromedriver.exe from http://chromedriver.storage.googleapis.com</summary>
-    <description>Developed in collaboration with the Chromium team, ChromeDriver is a standalone server which implements WebDriver's wire protocol.This package finds the latest version of Chromedriver.exe from http://chromedriver.storage.googleapis.com, downloads it and install it.</description>
+    <summary>Downloads and installs Chromedriver.exe from http://chromedriver.storage.googleapis.com</summary>
+    <description>Developed in collaboration with the Chromium team, ChromeDriver is a standalone server which implements WebDriver's wire protocol.</description>
     <projectUrl>https://sites.google.com/a/chromium.org/chromedriver/</projectUrl>
     <packageSourceUrl>https://github.com/yetanotherchris/Choco-chromedriver-latest</packageSourceUrl>
     <tags>chromedriver webdriver chrome</tags>
@@ -16,7 +16,7 @@
     <licenseUrl>https://code.google.com/p/chromium/codesearch#chromium/src/chrome/test/chromedriver/BUILD.gn</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>http://cdn.rawgit.com/yetanotherchris/Choco-chromedriver-latest/master/icon.png</iconUrl>
-    <releaseNotes>Moved to version number matching that on the chromedriver official site (for upgrades).</releaseNotes>
+    <releaseNotes></releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
