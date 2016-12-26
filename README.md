@@ -1,21 +1,10 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/c8sb6egibl30iaya?svg=true)](https://ci.appveyor.com/project/yetanotherchris/choco-chromedriver)
+
 # Choco-chromedriver
-Chocolatey package that downloads and installs the latest Chromedriver
 
-https://chocolatey.org/packages/chromedriver
+> Developed in collaboration with the Chromium team, ChromeDriver is a standalone server which implements WebDriver's wire protocol.
+> https://chocolatey.org/packages/chromedriver
 
-### Creating or updating the new package
+This Chocolatey package downloads and installs the latest Chromedriver.
 
-    # creates the boiler plate nuspec, ps1 files
-    choco new packagename 
-    
-    # Now edit the nuspec and ps1 files
-    
-    # Create the nupkg file
-    choco pack .\chromedriver\chromedriver.nuspec
-
-    # Test it works
-    choco install .\chromedriver.1.0.0.nupkg
-    choco uninstall chromedriver
-
-    # Publish on Chocolatey.org (need to upload a package once for this to work)
-    choco push .\chromedriver.1.0.0.nupkg --api-key={apikey}
+This repository does everything by magic via Appveyor, the only part that needs manual intervention is updating the `CHROMEDRIVER_VERSION_NUMBER` variable in the `appveyor.yml` file.
