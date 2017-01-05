@@ -20,6 +20,7 @@ wget "$url" -OutFile chromedriver_win32.zip
 $hash = Get-FileHash chromedriver_win32.zip
 $hash = $hash.Hash
 Write-Host "Hash is: $hash"
+rm chromedriver_win32.zip
 
 # Replace the checksum and version in the chocolateyinstall.ps1 file
 $pwd = pwd
