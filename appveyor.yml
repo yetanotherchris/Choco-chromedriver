@@ -3,11 +3,12 @@ skip_tags: true
 shallow_clone: true
 clone_depth: 1
 
-# Remove this comment in version 2.38 - it's a fix for the checksum being cached
+# Only fill in ChocoMinorVersionNumber if there's a problem with the package.
 environment:
   CHOCOLATEY_API_KEY:
     secure: nl5YRBS+wcVhpEJN3GqQxhqRyOMPgHXmRK6vhhk8oJD6fV3T+ecEpmjlYFthwXRz
   CHROMEDRIVER_VERSION_NUMBER: 2.37
+  ChocoMinorVersionNumber: .1
 
 cache:
   - packages ->  **\packages.config
@@ -17,4 +18,4 @@ branches:
     - master
 
 build_script:
-  - ps: ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber $env:CHROMEDRIVER_VERSION_NUMBER
+  - ps: ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber $env:CHROMEDRIVER_VERSION_NUMBER -chocoMinorVersionNumber ChocoMinorVersionNumber
