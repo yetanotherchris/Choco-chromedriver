@@ -3,10 +3,11 @@ skip_tags: true
 shallow_clone: true
 clone_depth: 1
 
+# Remove this comment in version 2.38 - it's a fix for the checksum being cached
 environment:
   CHOCOLATEY_API_KEY:
     secure: nl5YRBS+wcVhpEJN3GqQxhqRyOMPgHXmRK6vhhk8oJD6fV3T+ecEpmjlYFthwXRz
-  CHROMEDRIVER_VERSION_NUMBER: 2.37 
+  CHROMEDRIVER_VERSION_NUMBER: 2.37
 
 cache:
   - packages ->  **\packages.config
