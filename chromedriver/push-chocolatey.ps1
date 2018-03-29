@@ -4,7 +4,10 @@
 	$apiKey,
 	[Parameter(Mandatory=$true)]
 	[String]
-	$versionNumber
+	$versionNumber,
+	[Parameter(Mandatory=$false)]
+	[String]
+	$chocoMinorVersionNumber
 )
 
 $ErrorActionPreference = "Stop"
@@ -35,6 +38,6 @@ rm "$pwd\chocolateyinstall.template.ps1"
 popd
 pushd ./chromedriver/
 rm *.nupkg
-choco pack chromedriver.nuspec --version $versionNumber
+choco pack chromedriver.nuspec --version $versionNumber$chocoMinorVersionNumber
 choco push --api-key=$apiKey
 popd
