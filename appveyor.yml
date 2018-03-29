@@ -18,4 +18,4 @@ branches:
     - master
 
 build_script:
-  - ps: ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber $env:CHROMEDRIVER_VERSION_NUMBER -chocoMinorVersionNumber ChocoMinorVersionNumber
+  - ps: ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber $env:CHROMEDRIVER_VERSION_NUMBER -chocoMinorVersionNumber $env:ChocoMinorVersionNumber
