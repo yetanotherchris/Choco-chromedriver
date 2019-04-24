@@ -11,6 +11,6 @@ This repository does everything by magic via Appveyor, the only part that needs 
 
 ### Updating
 
-The page https://chromedriver.storage.googleapis.com/LATEST_RELEASE is watched via https://www.followthatpage.com/.
+The page http://chromedriver.chromium.org/ is watched via https://www.followthatpage.com/.
 
-When a new version is released, `CHROMEDRIVER_VERSION_NUMBER: 2.xxx` inside `appveyor.yml` is updated.
+When a new version is released, `Latest stable release: ChromeDriver xx.xxx` inside `appveyor.yml` is updated.
