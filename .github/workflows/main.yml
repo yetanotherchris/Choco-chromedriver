@@ -24,7 +24,7 @@ jobs:
       run: |
         content=$(wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE -q -O -)
         echo $content
-        sed -i 's/CHROMEDRIVER_VERSION_NUMBER: (\d.+)/$content/g' appveyor.yml
+        sed -i -E "s/R: (.*)/R: $content/g" appveyor.yml
         
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
