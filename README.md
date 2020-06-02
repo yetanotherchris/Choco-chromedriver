@@ -11,6 +11,4 @@ This repository does everything by magic via Appveyor, the only part that needs 
 
 ### Updating
 
-The page http://chromedriver.chromium.org/ is watched via https://www.followthatpage.com/.
-
-When a new version is released, `Latest stable release: ChromeDriver xx.xxx` inside `appveyor.yml` is updated.
+A [Github action](https://github.com/yetanotherchris/Choco-chromedriver/blob/master/.github/workflows/main.yml#L9) checks http://chromedriver.chromium.org/ every four hours. If the version there doesn't match the one in appveyor.yml, appveyor.yml is updated which triggers a new Chocolatey package.
