@@ -7,7 +7,7 @@
 
 This Chocolatey package downloads and installs the latest Chromedriver.
 
-This repository does everything by magic via Appveyor, the only part that needs manual intervention is updating the `CHROMEDRIVER_VERSION_NUMBER` variable in the `appveyor.yml` file.
+This repository does everything by magic via Appveyor and Github actions.
 
 ### Updating
 
