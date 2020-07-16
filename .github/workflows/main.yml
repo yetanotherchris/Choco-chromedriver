@@ -29,8 +29,6 @@ jobs:
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
           commit_message: Apply chromedriver updated
-          commit_user_name: Choco Chromedriver
-          commit_author: Chris Small
     
     
 
