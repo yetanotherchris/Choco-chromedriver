@@ -1,3 +1,4 @@
+![CI](https://github.com/yetanotherchris/Choco-chromedriver/workflows/CI/badge.svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/c8sb6egibl30iaya?svg=true)](https://ci.appveyor.com/project/yetanotherchris/choco-chromedriver)
 
 # Choco-chromedriver
