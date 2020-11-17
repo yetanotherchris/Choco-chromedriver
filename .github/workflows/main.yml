@@ -12,21 +12,20 @@ jobs:
 
     steps:
     
-    # Checks-out to $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
       name: Checkout source
       
     - id: get_chromedriver_version
       name: Get current ChromeDriver version
       run: |
-        content=$(wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE -q -O -)
-        echo $content
-        echo ::set-env name=CHROME_VERSION::$content
-        sed -i -E "s/R: (.*)/R: $content/g" appveyor.yml
+        chromeVersion=$(wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE -q -O -)
+        echo $chromeVersion
+        sed -i -E "s/R: (.*)/R: $chromeVersion/g" appveyor.yml
+        echo "##[set-output name=version;]$chromeVersion"
         
     - uses: stefanzweifel/git-auto-commit-action@v4
       name: Commit to repository
       with:
-          commit_message: Version $CHROME_VERSION
+          commit_message: Version ${{ steps.get_chromedriver_version.outputs.version }}
     
 
