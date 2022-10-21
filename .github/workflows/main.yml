@@ -19,13 +19,13 @@ jobs:
       name: Get current ChromeDriver version
       run: |
         chromeVersion=$(wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE -q -O -)
-        echo $chromeVersion
+        echo $chromeVersion 
         sed -i -E "s/R: (.*)/R: $chromeVersion/g" appveyor.yml
-        echo "##[set-output name=version;]$chromeVersion"
+        echo "name=$chromeVersion" >> $GITHUB_OUTPUT
         
     - uses: stefanzweifel/git-auto-commit-action@v4
       name: Commit to repository
       with:
-          commit_message: Version ${{ steps.get_chromedriver_version.outputs.version }}
+          commit_message: Version ${{ steps.get_chromedriver_version.outputs.name }}
     
 
