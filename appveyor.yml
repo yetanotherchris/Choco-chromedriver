@@ -8,7 +8,7 @@ environment:
   CHOCOLATEY_API_KEY:
     secure: nl5YRBS+wcVhpEJN3GqQxhqRyOMPgHXmRK6vhhk8oJD6fV3T+ecEpmjlYFthwXRz
   CHROMEDRIVER_VERSION_NUMBER: 108.0.5359.71
-  ChocoMinorVersionNumber: 0
+  ChocoMinorVersionNumber: 1
 
 cache:
   - packages ->  **\packages.config
