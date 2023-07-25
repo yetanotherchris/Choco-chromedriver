@@ -3,6 +3,7 @@ name: check and update chromedriver version
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 */4 * * *'
 
@@ -11,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
-    # Avoids the scheduled job being disabled after 60 days of inactivity to the repo
-    - uses: gautamkrishnar/keepalive-workflow@v1 
     
     - uses: actions/checkout@v2
       name: Checkout source
