@@ -12,9 +12,13 @@ jobs:
 
     steps:
     
+    # Avoids the scheduled job being disabled after 60 days of inactivity to the repo
+    - uses: gautamkrishnar/keepalive-workflow@v1 
+    
     - uses: actions/checkout@v2
       name: Checkout source
-      
+    
+    # Parse the current chrome version from Google
     - id: get_chromedriver_version
       name: Get current ChromeDriver version
       run: |
