@@ -1,4 +1,4 @@
-name: CI
+name: check and update chromedriver version
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -25,7 +25,7 @@ jobs:
         chromeVersion=$(wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE -q -O -)
         echo $chromeVersion
         sed -i -E "s/R: (.*)/R: $chromeVersion/g" appveyor.yml
-        echo "##[set-output name=version;]$chromeVersion"
+        echo "version=$chromeVersion" >> "$GITHUB_OUTPUT"
         
     - uses: stefanzweifel/git-auto-commit-action@v4
       name: Commit to repository
