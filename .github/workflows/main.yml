@@ -20,7 +20,8 @@ jobs:
     - id: get_chromedriver_version
       name: Get current ChromeDriver version
       run: |
-        chromeVersion=$(wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE -q -O -)
+        json_content=$(wget https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json -q -O -)
+        chromeVersion=$(echo "$json_content" | jq -r '.channels.Stable.version')
         echo $chromeVersion
         sed -i -E "s/R: (.*)/R: $chromeVersion/g" appveyor.yml
         echo "version=$chromeVersion" >> "$GITHUB_OUTPUT"
