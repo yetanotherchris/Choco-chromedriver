@@ -11,6 +11,7 @@
 )
 
 $ErrorActionPreference = "Stop"
+$desiredPlatform = "win32"
 
 pushd ./chromedriver/tools
 
