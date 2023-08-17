@@ -15,7 +15,11 @@ $ErrorActionPreference = "Stop"
 pushd ./chromedriver/tools
 
 # Download the version
-$url = "https://chromedriver.storage.googleapis.com/$versionNumber/chromedriver_win32.zip"
+# URL of the JSON file
+$jsonUrl = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
+# Fetch JSON content
+$jsonContent = Invoke-RestMethod -Uri $jsonUrl
+$url = $jsonContent.channels.Stable.downloads.chromedriver | Where-Object { $_.platform -eq $desiredPlatform } | Select-Object -ExpandProperty url
 Write-Host "Downloading $url"
 wget "$url" -OutFile chromedriver_win32.zip
 
