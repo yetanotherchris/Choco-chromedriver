@@ -7,13 +7,13 @@
     <version>$version$</version>
     <authors>The Chromium Authors</authors>
     <owners>C.Small</owners>
-    <summary>Downloads and installs Chromedriver.exe from http://chromedriver.storage.googleapis.com</summary>
+    <summary>Downloads and installs Chromedriver.exe from https://googlechromelabs.github.io/chrome-for-testing/</summary>
     <description>Developed in collaboration with the Chromium team, ChromeDriver is a standalone server which implements WebDriver's wire protocol.</description>
-    <projectUrl>https://sites.google.com/a/chromium.org/chromedriver/</projectUrl>
+    <projectUrl>https://chromedriver.chromium.org/home</projectUrl>
     <packageSourceUrl>https://github.com/yetanotherchris/Choco-chromedriver-latest</packageSourceUrl>
     <tags>chromedriver webdriver chrome</tags>
     <copyright>Chromedriver authors</copyright>
-    <licenseUrl>https://code.google.com/p/chromium/codesearch#chromium/src/chrome/test/chromedriver/BUILD.gn</licenseUrl>
+    <licenseUrl>https://chromium.googlesource.com/chromium/src/+/refs/heads/main/chrome/test/chromedriver/BUILD.gn</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>http://cdn.rawgit.com/yetanotherchris/Choco-chromedriver-latest/master/icon.png</iconUrl>
     <releaseNotes></releaseNotes>
