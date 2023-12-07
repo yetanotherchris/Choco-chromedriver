@@ -7,7 +7,7 @@ clone_depth: 1
 environment:
   CHOCOLATEY_API_KEY:
     secure: nl5YRBS+wcVhpEJN3GqQxhqRyOMPgHXmRK6vhhk8oJD6fV3T+ecEpmjlYFthwXRz
-  CHROMEDRIVER_VERSION_NUMBER: 120.0.6099.62
+  CHROMEDRIVER_VERSION_NUMBER: 120.0.6099.71
   ChocoMinorVersionNumber: 3
 
 cache:
