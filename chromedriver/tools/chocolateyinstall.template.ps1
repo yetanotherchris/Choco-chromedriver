@@ -2,21 +2,31 @@
 
 $packageName = "chromedriver"
 $toolsDir    = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$checkSum = "{CHECKSUM}"
+$checkSum32 = "{CHECKSUM32}"
+$checkSum64 = "{CHECKSUM64}"
 $chromedriverVersion = "{VERSION}"
-$desiredPlatform = "win32"
+$win32Platform = "win32"
+$win64Platform = "win64"
 
 # Use the new google API
 # URL to fetch JSON content from
 $jsonUrl = "https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json"
+
 # Fetch the JSON content from the URL
 $jsonContent = Invoke-RestMethod -Uri $jsonUrl
-# Find the desired versioninfo
-$desiredVersionInfo = $jsonContent.versions | Where-Object { $_.version -eq $chromedriverVersion }
 
-# Find the Chromedriver download URL for the desired platform
-$chromedriverUrl = $desiredVersionInfo.downloads.$packageName | 
-    Where-Object { $_.platform -eq $desiredPlatform } | 
-    Select-Object -ExpandProperty url
+# Find the desired download links
+$desiredVersionInfo = ($jsonContent.versions | Where-Object { $_.version -eq $chromedriverVersion }).downloads.$packageName
 
-Install-ChocolateyZipPackage "packageName" -url "$chromedriverUrl" -unzipLocation "$toolsDir" -checksumType "sha256" -checksum "$checkSum"
+# Find the Chromedriver download URL for the desired platforms
+$win32Url = $desiredVersionInfo | Where-Object { $_.platform -eq $win32Platform } | Select-Object -ExpandProperty url
+$win64Url = $desiredVersionInfo | Where-Object { $_.platform -eq $win64Platform } | Select-Object -ExpandProperty url
+
+Install-ChocolateyZipPackage "packageName" `
+    -Url "$win32Url" `
+    -Url64bit "$win64Url" `
+    -UnzipLocation "$toolsDir" `
+    -ChecksumType "sha256" `
+    -Checksum "$checkSum32" `
+    -ChecksumType64 "shas256" `
+    -Checksum64 "$checkSum64"
