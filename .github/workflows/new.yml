@@ -31,10 +31,9 @@ jobs:
         
         echo $chromeVersion
         echo "$chromeVersion" > version.txt
-        echo "output:"
-        echo $env:GITHUB_OUTPUT 
-        $env:GITHUB_OUTPUT += "version=$chromeVersion"
-        echo $env:GITHUB_OUTPUT 
+        
+        # Write to the GITHUB_OUTPUT, which is a file
+        echo "version=$chromeVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
 
     - name: Print step version
       run: | 
