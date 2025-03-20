@@ -27,6 +27,7 @@ $url64 = $jsonContent.channels.Stable.downloads.chromedriver | Where-Object { $_
 
 Write-Host "Downloading $url32"
 Invoke-WebRequest "$url32" -OutFile chromedriver_win32.zip
+Get-ChildItem
 
 # Get its checksum
 $hash32 = Get-FileHash chromedriver_win32.zip
@@ -36,6 +37,7 @@ Remove-Item chromedriver_win32.zip
 
 Write-Host "Downloading $url64"
 Invoke-WebRequest "$url64" -OutFile chromedriver_win64.zip
+Get-ChildItem
 
 # Get its checksum
 $hash64 = Get-FileHash chromedriver_win64.zip
