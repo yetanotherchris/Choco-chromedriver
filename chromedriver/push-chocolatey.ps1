@@ -50,7 +50,7 @@ Remove-Item "$win64Filename"
 
 # Replace the checksum and version in the chocolateyinstall.ps1 file
 $currentDir = Get-Location
-$content = [IO.File]::ReadAllText("$pwd\chocolateyinstall.template.ps1")
+$content = [IO.File]::ReadAllText("$currentDir\chocolateyinstall.template.ps1")
 $content = $content.Replace("{CHECKSUM32}", $hash32)
 $content = $content.Replace("{CHECKSUM64}", $hash64)
 $content = $content.Replace("{VERSION}", $versionNumber)
