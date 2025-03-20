@@ -1,0 +1,43 @@
+name: use GHA instead of appveyor
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */4 * * *'
+
+jobs:
+  patch_version:
+    runs-on: ubuntu-latest
+    env:
+      CHOCOLATEY_MINOR_VERSION: 1
+      CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
+    
+    steps:
+    
+    - uses: actions/checkout@v2
+      name: Checkout source
+    
+    # Parse the current chrome version from Google
+    - id: get_chromedriver_version
+      name: Get current ChromeDriver version
+      run: |
+        json_content=$(wget https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json -q -O -)
+        chromeVersion=$(echo "$json_content" | jq -r '.channels.Stable.version')
+        echo $chromeVersion
+        echo "$chromeVersion" > version.txt
+        echo "version=$chromeVersion" >> "$GITHUB_OUTPUT"
+        
+    - uses: stefanzweifel/git-auto-commit-action@v5
+      name: Commit to repository
+      with:
+          branch: gha-test
+          create_branch: true
+          commit_message: Version ${{ steps.get_chromedriver_version.outputs.version }}
+
+    - id: chocolatey_push
+      name: Push to Chocolatey
+      shell: pwsh
+      run: |
+        ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber ${{ steps.get_chromedriver_version.outputs.version }} -chocoMinorVersionNumber $env:CHOCOLATEY_MINOR_VERSION
