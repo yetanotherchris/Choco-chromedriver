@@ -25,7 +25,7 @@ jobs:
     - id: get_chromedriver_version
       name: Get current ChromeDriver version
       run: |
-        $jsonUrl = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
+        $url = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
         $jsonContent = Invoke-RestMethod -Uri $jsonUrl -DisableKeepAlive
         $chromeVersion = $jsonContent.channels.Stable.version
         
