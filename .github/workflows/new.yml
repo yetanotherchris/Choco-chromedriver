@@ -28,10 +28,10 @@ jobs:
         $url = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
         $jsonContent = Invoke-RestMethod -Uri $jsonUrl -DisableKeepAlive
         $chromeVersion = $jsonContent.channels.Stable.version
-
+        
         echo $chromeVersion
         echo "$chromeVersion" > version.txt
-        echo "$chromeVersion" >> "$GITHUB_OUTPUT"
+        echo "version=$chromeVersion" >> "$GITHUB_OUTPUT"
         
     - uses: stefanzweifel/git-auto-commit-action@v5
       name: Commit to repository
