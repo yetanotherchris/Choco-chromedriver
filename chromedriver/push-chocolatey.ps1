@@ -58,6 +58,11 @@ $content = $content.Replace("{VERSION}", $versionNumber)
 [IO.File]::WriteAllText("$currentDir\chocolateyinstall.ps1", $content)
 Remove-Item "$currentDir\chocolateyinstall.template.ps1"
 
+# Install chocolatey
+Set-ExecutionPolicy Bypass -Scope Process -Force; 
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; 
+Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
 # Push to chocolatey.org
 Pop-Location
 Push-Location ./chromedriver/
