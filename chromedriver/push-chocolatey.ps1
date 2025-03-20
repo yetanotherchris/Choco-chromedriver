@@ -67,5 +67,5 @@ Pop-Location
 Push-Location ./chromedriver/
 Remove-Item *.nupkg
 choco pack chromedriver.nuspec --version $versionNumber$chocoMinorVersionNumber
-choco push --api-key=$apiKey
+choco push --api-key=$apiKey --source="https://push.chocolatey.org/"
 Pop-Location
