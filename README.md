@@ -1,4 +1,4 @@
-![CI status](https://github.com/yetanotherchris/Choco-chromedriver/actions/workflows/chocolatey.yml/badge.svg)
+![CI status](https://github.com/yetanotherchris/Choco-chromedriver/actions/workflows/push-chocolatey.yml/badge.svg)
 
 # Choco-chromedriver
 
