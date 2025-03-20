@@ -9,7 +9,7 @@ on:
 
 jobs:
   patch_version:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       CHOCOLATEY_MINOR_VERSION: 1
       CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
@@ -25,8 +25,10 @@ jobs:
     - id: get_chromedriver_version
       name: Get current ChromeDriver version
       run: |
-        json_content=$(wget https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json -q -O -)
-        chromeVersion=$(echo "$json_content" | jq -r '.channels.Stable.version')
+        $url = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
+        $jsonContent = Invoke-RestMethod -Uri $jsonUrl -DisableKeepAlive
+        $chromeVersion = $jsonContent.channels.Stable.version
+        
         echo $chromeVersion
         echo "$chromeVersion" > version.txt
         echo "version=$chromeVersion" >> "$GITHUB_OUTPUT"
