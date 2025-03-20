@@ -31,7 +31,7 @@ jobs:
         
         echo $chromeVersion
         echo "$chromeVersion" > version.txt
-        echo "version=$chromeVersion" >> "$GITHUB_OUTPUT"
+        echo "version=$chromeVersion" >> $env:$GITHUB_OUTPUT
 
     - name: Print step version
       run: | 
