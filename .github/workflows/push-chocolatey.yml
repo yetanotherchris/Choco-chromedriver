@@ -6,7 +6,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  patch_version:
+  push_chocolatey:
     runs-on: windows-latest
     env:
       CHOCOLATEY_MINOR_VERSION: 1
