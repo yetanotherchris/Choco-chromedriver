@@ -25,6 +25,7 @@ $jsonContent = Invoke-RestMethod -Uri $jsonUrl -DisableKeepAlive
 $url32 = $jsonContent.channels.Stable.downloads.chromedriver | Where-Object { $_.platform -eq $win32Platform } | Select-Object -ExpandProperty url
 $url64 = $jsonContent.channels.Stable.downloads.chromedriver | Where-Object { $_.platform -eq $win64Platform } | Select-Object -ExpandProperty url
 
+Get-ChildItem
 Write-Host "Downloading $url32"
 Invoke-WebRequest "$url32" -OutFile chromedriver_win32.zip
 Get-ChildItem
