@@ -33,7 +33,7 @@ jobs:
       name: Commit to repository
       with:
           branch: gha-test
-          create_branch: true
+          #create_branch: true
           commit_message: Version ${{ steps.get_chromedriver_version.outputs.version }}
 
     - id: chocolatey_push
