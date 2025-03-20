@@ -1,10 +1,9 @@
-name: Download and push to chocolatey
+name: Push new package to chocolatey
 
-# Runs every 4 hours
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 */4 * * *'
+  push:
+    branches: [ "master" ]
 
 jobs:
   patch_version:
@@ -18,16 +17,12 @@ jobs:
     - uses: actions/checkout@v4
       name: Checkout source
     
-    # Parse the current chrome version from Google
+    # A new version.txt should've been created for this workflow to trigger (or manually triggered)
     - id: get_chromedriver_version
-      name: Get current ChromeDriver version
+      name: Read ChromeDriver version
       run: |
-        $jsonUrl = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
-        $jsonContent = Invoke-RestMethod -Uri $jsonUrl -DisableKeepAlive
-        $chromeVersion = $jsonContent.channels.Stable.version
-        
+        $chromeVersion = Get-Content ./version.txt     
         echo $chromeVersion
-        echo "$chromeVersion" > version.txt
         
         # Write to GITHUB_OUTPUT, which is a file
         echo "version=$chromeVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
@@ -35,11 +30,6 @@ jobs:
     - name: Print get_chromedriver_version step version
       run: | 
         echo "Step version: ${{ steps.get_chromedriver_version.outputs.version }} "
-        
-    - uses: stefanzweifel/git-auto-commit-action@v5
-      name: Commit to repository
-      with:
-          commit_message: Version ${{ steps.get_chromedriver_version.outputs.version }}
 
     - id: chocolatey_push
       name: Push to Chocolatey
