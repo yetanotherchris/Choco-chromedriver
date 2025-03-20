@@ -32,6 +32,10 @@ jobs:
         echo $chromeVersion
         echo "$chromeVersion" > version.txt
         echo "version=$chromeVersion" >> "$GITHUB_OUTPUT"
+
+    - name: Print step version
+      run: | 
+        echo "Step version: ${{ steps.get_chromedriver_version.outputs.version }} "
         
     - uses: stefanzweifel/git-auto-commit-action@v5
       name: Commit to repository
