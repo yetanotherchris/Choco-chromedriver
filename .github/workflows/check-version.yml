@@ -1,0 +1,40 @@
+name: Check for new Chromedriver version
+
+# Runs every 4 hours
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */4 * * *'
+
+jobs:
+  patch_version:
+    runs-on: windows-latest
+    
+    steps:
+    
+    - uses: actions/checkout@v4
+      name: Checkout source
+    
+    # Parse the current chrome version from Google
+    - id: get_chromedriver_version
+      name: Get current ChromeDriver version
+      run: |
+        $jsonUrl = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
+        $jsonContent = Invoke-RestMethod -Uri $jsonUrl -DisableKeepAlive
+        $chromeVersion = $jsonContent.channels.Stable.version
+        
+        echo $chromeVersion
+        echo "$chromeVersion" > version.txt
+        
+        # Write to GITHUB_OUTPUT, which is a file
+        echo "version=$chromeVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+    - name: Print get_chromedriver_version step version
+      run: | 
+        echo "Step version: ${{ steps.get_chromedriver_version.outputs.version }} "
+
+    # If the version hasn't changed, no push occurs
+    - uses: stefanzweifel/git-auto-commit-action@v5
+      name: Commit to repository
+      with:
+          commit_message: Version ${{ steps.get_chromedriver_version.outputs.version }}
