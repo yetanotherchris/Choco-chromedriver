@@ -13,6 +13,8 @@
 $ErrorActionPreference = "Stop"
 $win32Platform = "win32"
 $win64Platform = "win64"
+$win32Filename = "chromedriver_win32.zip"
+$win64Filename = "chromedriver_win64.zip"
 
 Push-Location ./chromedriver/tools
 
@@ -27,24 +29,24 @@ $url64 = $jsonContent.channels.Stable.downloads.chromedriver | Where-Object { $_
 
 Get-ChildItem
 Write-Host "Downloading $url32"
-Invoke-WebRequest "$url32" -OutFile chromedriver_win32.zip
+Invoke-WebRequest "$url32" -OutFile "$win32Filename"
 Get-ChildItem
 
 # Get its checksum
-$hash32 = Get-FileHash chromedriver_win32.zip
+$hash32 = Get-FileHash "$win32Filename"
 $hash32 = $hash32.Hash
 Write-Host "Hash is: $hash32"
-Remove-Item chromedriver_win32.zip
+Remove-Item "$win32Filename"
 
 Write-Host "Downloading $url64"
-Invoke-WebRequest "$url64" -OutFile chromedriver_win64.zip
+Invoke-WebRequest "$url64" -OutFile "$win64Filename"
 Get-ChildItem
 
 # Get its checksum
-$hash64 = Get-FileHash chromedriver_win64.zip
+$hash64 = Get-FileHash "$win64Filename"
 $hash64 = $hash64.Hash
 Write-Host "Hash is: $hash64"
-Remove-Item chromedriver_win64.zip
+Remove-Item "$win64Filename"
 
 # Replace the checksum and version in the chocolateyinstall.ps1 file
 $currentDir = Get-Location
