@@ -9,7 +9,7 @@ jobs:
   push_chocolatey:
     runs-on: windows-latest
     env:
-      CHOCOLATEY_MINOR_VERSION: '5'
+      CHOCOLATEY_MINOR_VERSION: ''
       CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
     
     steps:
