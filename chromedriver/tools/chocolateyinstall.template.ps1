@@ -28,5 +28,5 @@ Install-ChocolateyZipPackage "packageName" `
     -UnzipLocation "$toolsDir" `
     -ChecksumType "sha256" `
     -Checksum "$checkSum32" `
-    -ChecksumType64 "shas256" `
+    -ChecksumType64 "sha256" `
     -Checksum64 "$checkSum64"
