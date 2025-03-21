@@ -37,7 +37,7 @@ jobs:
         $jsonContent = Invoke-RestMethod -Uri $jsonUrl -DisableKeepAlive
         $chromeVersion = $jsonContent.channels.Stable.version
 
-        if ($chromeVersion -ne $currentVersion) {
+        if ($chromeVersion.Trim() -ne $currentVersion.Trim()) {
             Write-Output "Version has changed (current: $currentVersion, Google repo version: $chromeVersion)."
             echo "$chromeVersion" > version.txt
 
