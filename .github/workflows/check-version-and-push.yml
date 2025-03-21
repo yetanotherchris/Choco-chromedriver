@@ -67,4 +67,4 @@ jobs:
       if: steps.check-version.outputs.changed == 'true' || inputs.forcepush == 'true'
       shell: pwsh
       run: |
-        ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber ${{ steps.check-version.outputs.chromeVersion }} -chocoMinorVersionNumber ${{ inputs.chocolatey_minor_version }} 
+        ./chromedriver/push-chocolatey.ps1 -apiKey "$env:CHOCOLATEY_API_KEY" -versionNumber "${{ steps.check-version.outputs.chromeVersion }}" -chocoMinorVersionNumber "${{ inputs.chocolatey_minor_version }}" 
