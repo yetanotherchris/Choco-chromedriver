@@ -12,6 +12,11 @@ on:
           - 'false'
           - 'true'
         default: 'false'
+      chocolatey_minor_version:
+        description: 'Chocolatey Minor Version (for failed pushes)' 
+        type: text
+        required: false
+        default: ''
   schedule:
     - cron: '0 */4 * * *'
 
@@ -19,7 +24,6 @@ jobs:
   patch_version:
     runs-on: windows-latest
     env:
-      CHOCOLATEY_MINOR_VERSION: ''
       CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
     
     steps:
@@ -61,4 +65,4 @@ jobs:
       if: steps.check-version.outputs.changed == 'true' || inputs.forcepush == 'true'
       shell: pwsh
       run: |
-        ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber ${{ steps.check-version.outputs.chromeVersion }} -chocoMinorVersionNumber $env:CHOCOLATEY_MINOR_VERSION
+        ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber ${{ steps.check-version.outputs.chromeVersion }} -chocoMinorVersionNumber ${{ inputs.chocolatey_minor_version }} 
