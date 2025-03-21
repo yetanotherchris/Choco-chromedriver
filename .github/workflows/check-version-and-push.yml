@@ -1,0 +1,64 @@
+name: Check and push new Chromedriver version
+
+# Runs every 4 hours
+on:
+  workflow_dispatch:
+    inputs:
+      forcepush:
+        description: 'Force update'
+        required: true
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+        default: 'false'
+  schedule:
+    - cron: '0 */4 * * *'
+
+jobs:
+  patch_version:
+    runs-on: windows-latest
+    env:
+      CHOCOLATEY_MINOR_VERSION: ''
+      CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
+    
+    steps:
+    
+    - uses: actions/checkout@v4
+      name: Checkout source
+
+    # Parse the current chrome version from Google
+    - id: check-version
+      name: Get current ChromeDriver version & compare
+      run: |
+        $currentVersion = Get-Content version.txt -Raw
+        
+        $jsonUrl = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
+        $jsonContent = Invoke-RestMethod -Uri $jsonUrl -DisableKeepAlive
+        $chromeVersion = $jsonContent.channels.Stable.version
+
+        if ($chromeVersion -ne $currentVersion) {
+            Write-Output "Version has changed (current: $currentVersion, Google repo version: $chromeVersion)."
+            echo "$chromeVersion" > version.txt
+
+            # Write to GITHUB_OUTPUT, which is a file
+            echo "changed=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+            echo "chromeVersion=$chromeVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+        } else {
+            Write-Output "Version unchanged (current: $currentVersion, Google repo version: $chromeVersion)."
+            echo "changed=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+        }
+
+    # If the version hasn't changed, no push occurs
+    - uses: stefanzweifel/git-auto-commit-action@v5
+      name: Commit to repository
+      if: steps.check-version.outputs.changed == 'true' || inputs.forcepush == 'true'
+      with:
+        commit_message: Version ${{ steps.get_chromedriver_version.outputs.chromeVersion }}
+
+    - id: chocolatey_push
+      name: Push to Chocolatey
+      if: steps.check-version.outputs.changed == 'true' || inputs.forcepush == 'true'
+      shell: pwsh
+      run: |
+        ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber ${{ steps.get_chromedriver_version.outputs.chromeVersion }} -chocoMinorVersionNumber $env:CHOCOLATEY_MINOR_VERSION
