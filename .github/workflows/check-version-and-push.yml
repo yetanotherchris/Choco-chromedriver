@@ -12,11 +12,13 @@ on:
           - 'false'
           - 'true'
         default: 'false'
+
       chocolatey_minor_version:
         description: 'Chocolatey Minor Version (for failed pushes)' 
-        type: text
+        type: string
         required: false
         default: ''
+
   schedule:
     - cron: '0 */4 * * *'
 
@@ -40,6 +42,7 @@ jobs:
         $jsonUrl = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
         $jsonContent = Invoke-RestMethod -Uri $jsonUrl -DisableKeepAlive
         $chromeVersion = $jsonContent.channels.Stable.version
+        echo "chromeVersion=$chromeVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
         if ($chromeVersion.Trim() -ne $currentVersion.Trim()) {
             Write-Output "Version has changed (current: $currentVersion, Google repo version: $chromeVersion)."
@@ -47,7 +50,6 @@ jobs:
 
             # Write to GITHUB_OUTPUT, which is a file
             echo "changed=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
-            echo "chromeVersion=$chromeVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
         } else {
             Write-Output "Version unchanged (current: $currentVersion, Google repo version: $chromeVersion)."
             echo "changed=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
