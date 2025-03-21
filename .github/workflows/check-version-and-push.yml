@@ -54,11 +54,11 @@ jobs:
       name: Commit to repository
       if: steps.check-version.outputs.changed == 'true' || inputs.forcepush == 'true'
       with:
-        commit_message: Version ${{ steps.get_chromedriver_version.outputs.chromeVersion }}
+        commit_message: Version ${{ steps.check-version.outputs.chromeVersion }}
 
     - id: chocolatey_push
       name: Push to Chocolatey
       if: steps.check-version.outputs.changed == 'true' || inputs.forcepush == 'true'
       shell: pwsh
       run: |
-        ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber ${{ steps.get_chromedriver_version.outputs.chromeVersion }} -chocoMinorVersionNumber $env:CHOCOLATEY_MINOR_VERSION
+        ./chromedriver/push-chocolatey.ps1 -apiKey $env:CHOCOLATEY_API_KEY -versionNumber ${{ steps.check-version.outputs.chromeVersion }} -chocoMinorVersionNumber $env:CHOCOLATEY_MINOR_VERSION
